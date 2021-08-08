@@ -1,5 +1,5 @@
 <template>
-  <div id="pop" v-if="popFlag">
+  <div id="pop">
     <div class="popBox">
       <div class="header">
         <p class="title">{{ popData.title }}</p>
@@ -46,19 +46,14 @@ export default {
     },
   },
   data() {
-    return {
-      popFlag: false,
-    };
+    return {};
   },
   methods: {
-    openPop() {
-      this.popFlag = true;
-    },
     closePop() {
-      this.popFlag = false;
+      this.$emit("closePop", { text: "close", type: 0 });
     },
     confirmPop() {
-      this.popFlag = false;
+      this.$emit("closePop", { text: "confirm", type: 1 });
     },
   },
 };
@@ -96,6 +91,8 @@ export default {
       border: none;
       background: none;
       font-size: 16px;
+      outline: none;
+      cursor: pointer;
     }
   }
   .content {
@@ -108,12 +105,14 @@ export default {
     width: 450px;
     display: flex;
     .btnGroup {
-      margin-left: 300px;
+      margin-left: 200px;
       input {
         border: none;
         border-radius: 5px;
         width: 80px;
         height: 40px;
+        outline: none;
+        cursor: pointer;
       }
       .cancle {
         background: #f8f8f8;

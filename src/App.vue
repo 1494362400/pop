@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <button @click="openPop()">打开弹窗</button>
-    <pop-box ref="pop" :popData="popData"></pop-box>
+    <pop-box ref="pop" v-if="popFlag" :popData="popData" @closePop="closePop"></pop-box>
   </div>
 </template>
 
@@ -17,14 +17,25 @@ export default {
       popData: {
         title: "提示",
         content: "此操作将永久删除文件，是否继续？",
+        cancleBtn: "取消",
         confirmBtn: "确定",
       },
       popFlag: false,
     };
   },
   methods: {
-    openPop() {
-      this.$refs.pop.openPop();
+    openPop(){
+      this.popFlag=true
+    },
+    closePop(val) {
+      switch(val.type){
+        case 0:
+          this.popFlag=false
+          break;
+        case 1:
+          this.popFlag=false
+          break;
+      }
     },
   },
 };
